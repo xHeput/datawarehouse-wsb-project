@@ -1,0 +1,30 @@
+INSERT INTO silver.erp_cust_az12(
+	CID,
+	BDATE,
+	GEN
+)
+SELECT
+CASE WHEN CID LIKE 'NAS%' THEN SUBSTRING(CID, 4, LEN(CID))
+	ELSE CID
+END CID,
+CASE WHEN BDATE > GETDATE() THEN NULL
+	ELSE BDATE
+END BDATE,
+CASE WHEN UPPER(TRIM(GEN)) IN ('F', 'FEMALE') THEN 'Female'
+	 WHEN UPPER(TRIM(GEN)) IN ('M', 'MALE') THEN 'Male'
+	 ELSE 'NOT AVAILABLE'
+END AS GEN
+FROM bronze.erp_cust_az12
+
+-- Identify strange dates
+SELECT DISTINCT
+BDATE
+FROM silver.erp_cust_az12
+WHERE BDATE < '1926-01-01' OR BDATE > GETDATE()
+
+-- data standarization and consistency
+SELECT DISTINCT 
+GEN
+FROM silver.erp_cust_az12
+
+SELECT * FROM silver.erp_cust_az12

@@ -45,7 +45,7 @@ AI GENERATED
     created or updated may fail if the procedure does not already exist.
 */
 
-EXECUTE bronze.load_bronze;
+--EXECUTE bronze.load_bronze;
 
 CREATE OR ALTER PROCEDURE bronze.load_bronze AS
 BEGIN
