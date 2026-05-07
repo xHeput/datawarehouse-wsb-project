@@ -1,4 +1,3 @@
--- SALES
 CREATE VIEW gold.fact_sales AS
 SELECT 
 sd.sls_ord_num AS order_number,
@@ -12,6 +11,6 @@ sd.sls_quantity AS quanity,
 sd.sls_price
 FROM silver.crm_sales_details sd
 LEFT JOIN gold.dim_products pr
-ON sd.sls_prd_key = pr.product_number 
+ON sd.sls_prd_key = pr.product_number
 LEFT JOIN gold.dim_customers cu
 ON sd.sls_cust_id = cu.customer_id
